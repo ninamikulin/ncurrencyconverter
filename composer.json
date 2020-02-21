@@ -1,0 +1,15 @@
+{
+
+	"autoload": {
+
+		"classmap":[
+
+			"./"
+
+		]
+
+	},
+	"require": {
+		"guzzlehttp/guzzle": "^6.5"
+	}
+}
