@@ -2,11 +2,11 @@
 
 1. [About](#about)
 2. [Routing setup](#routing-setup)   
-  i. [index file](#index-file)   
+  i. [Index file](#index-file)   
   ii. [Router](#router)  
-  iii. [routes](#routes)  
+  iii. [Routes](#routes)  
   iv. [Requests](#requests)  
-  v. [bootstrap](#bootstrap) 
+  v. [Bootstrap](#bootstrap) 
 3. [Controllers](#controllers)  
   i. [Currency Controller](#currency-controller)
   
