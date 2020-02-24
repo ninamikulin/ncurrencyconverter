@@ -49,7 +49,7 @@ Router::load('../routes.php')
 protected $routes = [
   // array for get routes
   'GET' => [],
-  //array for post routes
+  // array for post routes
   'POST' => []
 ];
 ```
@@ -64,9 +64,9 @@ protected $routes = [
 ```php
 public static function load($file)
 {
-  //initiates a new instance of the router
+  // initiates a new instance of the router
   $router = new static;
-  //require the file from which to load the routes
+  // require the file from which to load the routes
   require $file;
 
   //returns the router
@@ -130,7 +130,7 @@ public function direct($uri, $requestType)
 - returns the call to the method
   
 ```php
-//instantiates a new controller and call the method based on the value associated with the uri in the routes file
+// instantiates a new controller and call the method based on the value associated with the uri in the routes file
 protected function callMethod($controller, $method)
 {
   // creates new controller instance
@@ -202,7 +202,7 @@ public static function method()
 ```php
 <?php
 
-//accepts the name of the view argument and just returns the path to the view file (so we don't need to require the entire path inside every method in the Controller classes
+// accepts the name of the view argument and just returns the path to the view file (so we don't need to require the entire path inside every method in the Controller classes
 function view($name, $data=[])
 {
   // extracts the data if there is any - parameters passed to the view
@@ -251,7 +251,7 @@ public function home()
 <details><summary>getResults</summary>
 
 ```php
-//returns the show view with the converted amount
+// returns the show view with the converted amount
 public function getResults()
 {
   // checking if there are parameters,  if the value is present
