@@ -85,7 +85,6 @@ public function get($uri, $controller)
 {	
   // sets the routes array key=>value pairs
   $this->routes['GET'][$uri] = $controller;
-
 }
 ```
 </details>
@@ -277,7 +276,6 @@ public function getResults()
     'query' => [
     'base' => $_GET['from'],
     'symbols' => $_GET['to'],
-
     ]
   ]);
 
