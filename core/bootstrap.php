@@ -8,5 +8,4 @@ function view($name, $data=[])
 
 	// return and require the path to the view
 	return require   "../App/views/{$name}.view.php";
-
 }

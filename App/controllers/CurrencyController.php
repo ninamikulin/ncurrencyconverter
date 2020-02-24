@@ -10,10 +10,8 @@ class CurrencyController
 	// returns the home view with a list of currencies
 	public function home()
 	{
-	
 		// making the request to get the list of currencies
 		$response = $this->makeRequest('GET', 'https://api.exchangeratesapi.io/latest');
-
 
 		/* Returning all the currencies as an associative array
 		- accessing the body of the response
@@ -21,8 +19,10 @@ class CurrencyController
 		- accessing the rates property where the array with the symbols lives 
 		- turning from obj to array*/
 		$currencies = get_object_vars(json_decode($response->getBody())->rates);
+
 		// adding the EUR value to the array
-		$currencies['EUR']='';
+		$currencies['EUR'] = '';
+
 		// sorting array by keys
 		ksort($currencies);
 
@@ -35,7 +35,6 @@ class CurrencyController
 	//returns the show view with the converted amount
 	public function getResults()
 	{
-
 		// checking if there are parameters,  if the value is present
 		if (empty($_GET)) {
 
@@ -45,7 +44,7 @@ class CurrencyController
 		} elseif (empty($_GET['value'])) {
 
 			echo 'Please choose a value.';
-				die();
+			die();
 		}
 
 		/*
@@ -56,8 +55,8 @@ class CurrencyController
 		$response = $this->makeRequest('GET', 'https://api.exchangeratesapi.io/latest', [
 
 			'query' => [
-				'base' => $_GET['from'],
-				'symbols' => $_GET['to'],
+			'base' => $_GET['from'],
+			'symbols' => $_GET['to'],
 
 			]
 		]);
@@ -75,7 +74,8 @@ class CurrencyController
 		/* calculating the converted amount - number format function casts the values to int and rounds the numbers to 2 decimals 
 		mind the curly braces that make possible to access methods of an object from a class dynamically*/
 		$converted = number_format($_GET['value'] * $jsonBody->rates->{$_GET['to']}, 2);
-		return view('show', ['converted'=>$converted]);
+
+		view('show', ['converted' => $converted]);
 	}
 
 	public function makeRequest($method, $url, $query=[])

@@ -3,7 +3,6 @@
 namespace App\core;
 
 class Router
-
 {
 	protected $routes = [
 		// array for GET routes
@@ -15,12 +14,12 @@ class Router
 
 	public static function load($file)
 	{
-		//initiates a new instance of the router
+		// initiates a new instance of the router
 		$router = new static;
-		//require the  file from which to load the routes
+		// require the  file from which to load the routes
 		require $file;
 		
-		//returns the router
+		// returns the router
 		return $router;
 	}
 
@@ -29,7 +28,6 @@ class Router
 	{	
 		// sets the routes array key=>value pairs
 		$this->routes['GET'][$uri] = $controller;
-		
 	}
 
 	// if get method is called, the $uri=>$controller pair is saved in the $routes['post'] property
@@ -38,7 +36,6 @@ class Router
 		// sets the routes array key=>value pairs
 		$this->routes['POST'][$uri] = $controller;
 	}
-
 
 	public function direct($uri, $requestType)
 	{	
@@ -52,7 +49,6 @@ class Router
 				);
 			}
 		throw new \Exception('No route defined for this URI.');
-
 	}
 
 	//instantiates a new controller and call the method based on the value associated with the uri in the routes file
@@ -65,11 +61,10 @@ class Router
 		// checks if method exists
 		if (! method_exists($controller, $method))
 		{
-			throw new \Exception(" does not respond to the  action.");	
+			throw new \Exception("The controller does not respond to the action.");	
 		}
 
 		// calls the method
 		return $controller->$method();
 	}
-
 }

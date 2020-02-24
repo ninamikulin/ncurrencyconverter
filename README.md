@@ -100,7 +100,6 @@ public function get($uri, $controller)
 {	
   // sets the routes array key=>value pairs
   $this->routes['POST'][$uri] = $controller;
-
 }
 ```
 </details>
@@ -113,7 +112,6 @@ public function get($uri, $controller)
 ```php
 public function direct($uri, $requestType)
 {	
-  var_dump('Router:direct');
   // only look inside the appropriate property - $routes['get'] / $routes['post'] - depending on the $requestType passed in (Requests.php class determines the method used and passes it to the Router.php)
   if (array_key_exists($uri, $this->routes[$requestType]))
     {	
@@ -124,8 +122,7 @@ public function direct($uri, $requestType)
     }
   // throws error if no route found
   throw new \Exception('No route defined for this URI.');
-
-	}
+}
 ```
 </details>
 <details><summary>callMethod</summary>
@@ -144,7 +141,7 @@ protected function callMethod($controller, $method)
   // checks if method exists
   if (! method_exists($controller, $method))
   {
-    throw new \Exception(" does not respond to the  action.");	
+    throw new \Exception("The controller does not respond to the action.");	
   }
 
   // calls the method
@@ -176,12 +173,12 @@ $router->get('converted', 'CurrencyController@getResults');
 
 ```php
 // returns the trimmed uri
-	public static function uri()	
-	{		
-		// trims the / at beginning and end of url, accesses the request uri in the global variable
-		// parses the url - returns only the path (without the query parameters etc.)
-		return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH),'/'); 
-	}
+public static function uri()	
+{		
+	// trims the / at beginning and end of url, accesses the request uri in the global variable
+	// parses the url - returns only the path (without the query parameters etc.)
+	return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/'); 
+}
 ```
 </details>
 
@@ -191,10 +188,10 @@ $router->get('converted', 'CurrencyController@getResults');
 
 ```php
 // returns the request method by accessing the global variable 
-	public static function method()
-	{	
-		return $_SERVER['REQUEST_METHOD'];		
-	}
+public static function method()
+{	
+	return $_SERVER['REQUEST_METHOD'];		
+}
 ```
 </details>
 </details>
@@ -213,7 +210,7 @@ function view($name, $data=[])
   extract($data);
 
   // return and require the path to the view
-  return require   "../App/views/{$name}.view.php";
+  return require "../App/views/{$name}.view.php";
 }
 ```
 ## Controllers
@@ -234,7 +231,6 @@ public function home()
   // making the request to get the list of currencies
   $response = $this->makeRequest('GET', 'https://api.exchangeratesapi.io/latest');
 
-
   /* Returning all the currencies as an associative array
   - accessing the body of the response
   - decoding the json to a php object
@@ -242,7 +238,7 @@ public function home()
   - turning from obj to array*/
   $currencies = get_object_vars(json_decode($response->getBody())->rates);
   // adding the EUR value to the array
-  $currencies['EUR']='';
+  $currencies['EUR'] = '';
   // sorting array by keys
   ksort($currencies);
 
@@ -259,7 +255,6 @@ public function home()
 //returns the show view with the converted amount
 public function getResults()
 {
-
   // checking if there are parameters,  if the value is present
   if (empty($_GET)) {
 
@@ -269,7 +264,7 @@ public function getResults()
   } elseif (empty($_GET['value'])) {
 
     echo 'Please choose a value.';
-      die();
+    die();
   }
 
   /*
@@ -280,8 +275,8 @@ public function getResults()
   $response = $this->makeRequest('GET', 'https://api.exchangeratesapi.io/latest', [
 
     'query' => [
-      'base' => $_GET['from'],
-      'symbols' => $_GET['to'],
+    'base' => $_GET['from'],
+    'symbols' => $_GET['to'],
 
     ]
   ]);
@@ -299,7 +294,7 @@ public function getResults()
   /* calculating the converted amount - number format function casts the values to int and rounds the numbers to 2 decimals 
   mind the curly braces that make possible to access methods of an object from a class dynamically*/
   $converted = number_format($_GET['value'] * $jsonBody->rates->{$_GET['to']}, 2);
-  return view('show', ['converted'=>$converted]);
+  return view('show', ['converted' => $converted]);
 }
 ```
 </details>
